@@ -24,7 +24,8 @@ More Projects to come....
 **Please get in touch in case you're unable to access any documents.** 
 **email @ sakina.khanrashid@outlook.com**
 
-**Project 1** .  **Diabetes 30-Day Readmission Analysis**
+# **Project 1** .  **Diabetes 30-Day Readmission Analysis**
+                                                                                    
 
 Glucose risk stratification revealed that patients with very high glucose levels had the highest 30-day readmission rate (55.5%), while patients with normal glucose had the lowest (45.4%). Patients without glucose measurements also had elevated readmission (46.0%), highlighting potential care gaps. This visual complements A1C analysis and demonstrates the dashboard’s ability to combine clinical lab indicators with outcomes for actionable insights.
 
@@ -204,10 +205,378 @@ COUNTROWS(Very High Glucose) / COUNTROWS(all measured glucose)
 
 ---
 
-> “The card shows that 23.6% of patients have very high glucose, while the column chart shows that these patients have a 55.5% 30-day readmission rate. This distinction between patient distribution vs outcome rate is critical in hospital dashboards.”
+> The card shows that 23.6% of patients have very high glucose, while the column chart shows that these patients have a 55.5% 30-day readmission rate. This distinction between patient distribution vs outcome rate is critical in hospital dashboards.
+> Same applies for Poor Control A1C — 48.3% of measured patients are Poor Control, and their readmission rate is ~45.2% in the chart.
+
+# **Project 2. Patient Risk Stratification Dashboard**
+
+## **Introduction**
+
+Healthcare organizations often need to quickly identify patients at risk of chronic conditions such as hypertension, obesity, smoking-related complications, or physical inactivity. This project demonstrates a full **data analytics pipeline**, from raw data cleaning and transformation in Python, to database management in SQL, and finally to interactive visualization in Power BI. The end goal is a **Patient Risk Stratification Dashboard** that provides actionable insights for clinicians, administrators, and stakeholders to make informed decisions on preventive care.
+
+This project highlights **data engineering, feature engineering, ETL, SQL querying, and dashboarding skills**, showing the ability to handle real-world healthcare datasets and extract meaningful insights.
+
+---
+
+## **Step 1: Data Cleaning & ETL in Python**
+
+We began with multiple raw datasets from NHANES-like sources:
+
+- **`demo_clean`**: patient demographics (age, gender, race/ethnicity, income)
+- **`bmx_clean`**: BMI measurements
+- **`bpx_clean`**: blood pressure readings
+- **`smq_clean`**: smoking status
+- **`paq_clean`**: physical activity
+
+**Tasks performed in Python:**
+
+1. **Cleaning and Type Conversion**
+    - Converted patient IDs to integers for consistent joins.
+    - Handled missing or invalid values (NaN replacement, NHANES codebook corrections).
+2. **Feature Engineering**
+    - **Obesity flag**: BMI ≥ 30 → 1, otherwise 0
+    - **Hypertensive flag**: systolic ≥130 or diastolic ≥80 → 1, else 0
+    - **Smoker flag**: current and ever smoked → 1, else 0
+    - **Physically inactive flag**: from questionnaire data
+3. **Risk Scoring**
+    - Combined the four risk flags into a `risk_score` (sum).
+    - Categorized `risk_category`: 0 → Low, 1–2 → Medium, 3–4 → High
+4. **Final Master Table**
+    - Merged all cleaned datasets on `patient_id`
+    - Resulting CSV: **`master_risk_table.csv`**, ready for database loading
+
+> This step demonstrated **ETL processes, data cleaning, transformation, and feature engineering**, core skills in Python and pandas.
 > 
 
-> Same applies for Poor Control A1C — 48.3% of measured patients are Poor Control, and their readmission rate is ~45.2% in the chart.
->
+---
+
+## **Step 2: SQL for Validation & Aggregation**
+
+Once the master table was exported to SQL, we used **SQL queries** to validate and aggregate the data:
+
+- **Validation queries**:
+    - Total patients: 11,933
+    - Key flags: Obese: 2,699 | Hypertensive: 2,504 | Smoker: 606 | Inactive: 1,168
+    - Risk category counts: Low: 6,880 | Medium: 4,837 | High: 216
+- **Analytical queries**:
+    - Average risk by age groups (Young child, Child, Middle age, Senior)
+    - Multiple risk factor distribution (0–4 risk factors)
+    - Hypertension prevalence by group
+- **SQL Views** were created for easier integration into Power BI, e.g.:
+
+```sql
+CREATE VIEW risk_summary AS
+SELECT
+    risk_category,
+    COUNT(*) AS patient_count,
+    AVG(risk_score) AS avg_risk_score
+FROM patient_risk_master
+GROUP BY risk_category;
+
+```
+
+> This step demonstrates **data validation, aggregation, and view creation**, making complex analyses accessible and reusable.
+> 
+
+---
+
+## **Step 3: Power BI Dashboard Creation**
+
+The goal of the dashboard is to provide **quick, actionable insights** for clinicians:
+
+**Step 3a: Loading Data**
+
+- Connected Power BI to the SQL database (or CSV if SQL was unavailable).
+- Ensured proper **data types** (numeric for risk_score, categorical for risk_category, flags as integers).
+
+**Step 3b: Dashboard Layout**
+
+1. **KPI Cards**
+    - Key metrics: Obese, Hypertensive, Smoker, Physically inactive
+    - Conditional formatting (color-coded for high, medium, low prevalence)
+2. **Column/Bar Charts**
+    - Average risk by age group
+    - Average risk by income group
+    - Risk category distribution
+3. **Slicers**
+    - Age group
+    - Income ratio
+    - Gender / Race/ethnicity
+4. **Tooltips & Insights**
+    - Hovering over bars shows prevalence of hypertension, obesity, smoking
+    - Explains why middle age or low-income groups have higher risk
+5. **Advanced Visualization**
+    - Highlight trends and correlations (risk vs age, income, lifestyle)
+    - Clear labels, intuitive color coding, clean layout
+
+> This step demonstrates **data storytelling, visualization best practices, and dashboard design** to make the insights actionable.
+
+---
+
+## **Step 4: Insights & Value**
+
+**Key insights from the dashboard**:
+
+- Middle-aged patients have the highest average risk score, largely driven by hypertension and obesity.
+- Socioeconomic factors matter: lower income groups show higher prevalence of key risk factors.
+- Majority of patients fall into the Low risk category, but a significant subset has multiple risk factors.
+- Clinicians can quickly identify high-risk patients for targeted interventions.
+
+**Why this is valuable**:
+
+- Stakeholders (clinicians, administrators, policymakers) can prioritize resources efficiently.
+- Dashboards allow **real-time monitoring** of risk factor prevalence and trends.
+- Data-driven preventive measures can be implemented for high-risk groups.
+
+---
+
+## **Step 5: Conclusion**
+
+In this project, we demonstrated the **full analytics lifecycle**:
+
+1. **Python**: Cleaned raw data, engineered meaningful features, created a master risk table.
+2. **SQL**: Validated the data, aggregated key metrics, created views for easy reporting.
+3. **Power BI**: Built an interactive, visually appealing dashboard that tells a story and highlights actionable insights.
+
+The **end-to-end pipeline** shows that analytics is not just about coding—it’s about **transforming raw data into insights** that can guide real-world decisions. By integrating Python, SQL, and Power BI, we have built a **reproducible and scalable solution** for patient risk stratification.
+
+---
+
+This project demonstrates expertise in:
+
+- **ETL & Feature Engineering** (Python & pandas)
+- **Data Validation & Aggregation** (SQL queries, views)
+- **Visualization & Storytelling** (Power BI)
+- **Analytical Thinking & Interpretation** (risk analysis, trends, correlations)
+
+# **Project 3. Hospital Appointment No-Show Analysis**
+
+**Improving Operational Efficiency Through Data-Driven Scheduling**
+
+---
+
+## 1. Introduction
+
+Missed medical appointments (“no-shows”) represent a critical operational challenge for healthcare systems. They waste clinical capacity, increase waiting times for other patients, and reduce the overall quality of care delivery.
+
+This project analyzes a real-world hospital appointment dataset (110,514 records) to identify the **primary drivers of no-show behavior** and translate those insights into **actionable operational strategies**.
+
+The goal is not only to understand *who* misses appointments, but *why* — and more importantly, **what the hospital can do about it**.
+
+---
+
+## 2. Data Source & Initial Preparation
+
+### Dataset Overview
+
+- Source: Public Kaggle dataset (Hospital Appointment No-Shows)
+- Records: **110,514 appointments**
+- No missing values
+- Data stored in **SQLite**, extracted into CSV for analysis
+
+### Key Variables
+
+- Appointment & scheduling: `scheduled_date`, `appointment_date`, `waiting_days`
+- Demographics: `age`, `gender`, `neighbourhood.`
+- Medical conditions: `hypertension`, `diabetes`, `alcoholism`, `handicap.`
+- Engagement: `sms_received`
+- Outcome: `no_show`
+
+---
+
+## 3. Data Readiness & Modeling Decisions
+
+Before importing into Power BI, several **analytical design decisions** were made to ensure clarity and performance.
+
+### 3.1 Feature Engineering (Calculated Columns)
+
+Instead of analyzing raw values directly, I created **semantic groupings** to make patterns interpretable:
+
+- **Age Group**
+    
+    Bucketed age into ranges (0–10, 11–20, …, 81+) to observe behavioral trends across life stages.
+    
+- **Waiting Days Group**
+    
+    Grouped `waiting_days` into:
+    
+    - Same Day
+    - 1–3 days
+    - 4–7 days
+    - 8–14 days
+    - 15–30 days
+    - 30+ days
+    
+    This allowed the analysis to focus on *time thresholds* rather than individual day values.
+    
+- **Number of Comorbidities**
+    
+    Summed binary medical indicators (hypertension, diabetes, alcoholism, handicap) to quantify overall medical complexity.
+    
+- **Comorbidity Group**
+    
+    Simplified into:
+    
+    - No comorbidity
+    - 1 comorbidity
+    - 2+ comorbidities
+    
+    This made comparisons intuitive for non-technical stakeholders.
+    
+
+### 3.2 Measures vs Columns (Modeling Choice)
+
+- **Columns** were used for grouping and slicing (Age Group, Waiting Days Group).
+- **Measures** were used for KPIs and aggregation:
+    - % No-Show
+    - Average Waiting Days
+    - Total Appointments
+    - Same-Day Attendance %
+
+This separation ensured the model remained **scalable, flexible, and performant**.
+
+---
+
+## 4. Power BI Dashboard Design Philosophy
+
+Rather than building a single overcrowded page, the report was structured into **three focused pages**, each answering a distinct business question:
+
+1. **Operational Efficiency** – *What is the main driver of no-shows?*
+2. **Geographic Risk** – *Where are failures concentrated?*
+3. **Patient Demographics** – *Who is most and least reliable?*
+
+This mirrors how real healthcare decisions are made: **overview → diagnosis → intervention**.
+
+---
+
+## 5. Key Findings & Storyline
+
+---
+
+## Page 1: Operational Efficiency
+
+### *“Time is the enemy of attendance.”*
+
+This dashboard establishes the **single most important insight** of the project.
+
+### Core Findings
+
+- **Same-Day Appointments = Gold Standard**
+    - Attendance rate: **~95%**
+    - Lowest no-show risk across all patient groups
+- **The Slope of Disengagement**
+    - No-show rate increases steadily with waiting time
+    - Patients waiting **30+ days** miss appointments at a rate of **~35%**
+- **The Waiting Gap**
+    - Average wait for patients who *show up*: **~9 days**
+    - Average wait for *no-shows*: **~15 days**
+
+### Interpretation
+
+This proves that **waiting time is the strongest predictor of patient behavior**, more influential than age, gender, or health status.
+
+> The problem is not patient irresponsibility — it is scheduling friction.
+> 
+
+---
+
+## Page 2: Geographic Risk
+
+### *“Localized anomalies and logistical barriers.”*
+
+This page investigates **where** the system fails.
+
+### Core Findings
+
+- **High-Volume Stability**
+    - Large neighborhoods (e.g., Jardim Camburi) manage high appointment volumes with stable no-show rates (~19–20%).
+- **Major Outlier**
+    - **ILHAS OCEANICAS DE TRINDADE** shows a **near 100% no-show rate**.
+    - This is a critical red flag indicating:
+        - severe transport/logistical barriers **or**
+        - potential data quality issues
+- **Scatter Plot Insight**
+    - Most neighborhoods follow the expected trend:
+        - Longer wait → higher no-shows
+    - However, some neighborhoods show **high no-show rates even with short waits**, suggesting **non-time-related barriers** (transport, socioeconomic factors).
+
+---
+
+## Page 3: Patient Demographics
+
+### *“Reliability increases with age and health necessity.”*
+
+This page explains **who** is most likely to attend.
+
+### Core Findings
+
+- **The Reliability Curve (U-Shaped)**
+    - Most reliable:
+        - Children (0–10)
+        - Seniors (60+)
+    - Least reliable:
+        - **Young adults (15–30)**
+- **Comorbidity Paradox**
+    - Patients with **hypertension, diabetes, or alcoholism** show **better attendance** than patients with no conditions.
+
+### Interpretation
+
+Patients with chronic conditions perceive appointments as **essential**, while healthier patients treat them as **optional**, especially when waiting times are long.
+
+---
+
+## 6. Executive Summary (Elevator Pitch)
+
+> *“Our biggest issue isn’t the patients — it’s the calendar.Same-day appointments achieve a 95% attendance rate, but when patients wait over 30 days, we lose 35% of them.Young adults and specific neighborhoods are the most at risk. By reducing wait times and targeting these groups, attendance can improve dramatically.”*
+> 
+
+---
+
+## 7. Recommendations & Action Plan
+
+### 1. Wait Time Strategy
+
+- **Finding:** No-shows increase from **5% (Same-Day)** to **35% (30+ Days)**
+- **Action:**
+    - Implement a **Fast-Track scheduling rule**
+    - If an appointment exceeds **10 days**, trigger high-touch confirmation (phone call, not just SMS)
+- **KPI to Monitor:**
+    - *% of appointments scheduled within 7 days*
+
+---
+
+### 2. Demographic Targeting
+
+- **Finding:** Highest no-show rates in the **15–30 age group**
+- **Action:**
+    - Use **stronger digital engagement** (WhatsApp, push notifications)
+    - Emphasize appointment importance in messaging
+- **KPI to Monitor:**
+    - *No-Show Rate for patients under 30*
+
+---
+
+### 3️. Geographic & Logistical Fixes
+
+- **Finding:** Near-total failure in **Ilhas Oceanicas**
+- **Action:**
+    - Investigate transport or facility access
+    - Consider **telehealth or mobile clinics**
+- **KPI to Monitor:**
+    - *Regional No-Show Variance*
+
+---
+
+##  Conclusion
+
+This project demonstrates how **data modeling, thoughtful visualization, and focused storytelling** can transform raw appointment data into **operational insight**.
+
+The analysis shows that:
+
+- No-shows are **system-driven**, not patient-driven
+- Waiting time is the dominant lever
+- Targeted interventions — not blanket policies — yield the greatest impact
+
+By aligning scheduling strategy with patient behavior, healthcare providers can improve attendance, reduce wasted capacity, and deliver better care.
 
 
