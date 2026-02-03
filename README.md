@@ -625,7 +625,7 @@ Patients with chronic conditions perceive appointments as **essential**, while h
 
 ---
 
-## 6. Executive Summary (Elevator Pitch)
+## 6.  Summary 
 
 > *“Our biggest issue isn’t the patients — it’s the calendar.Same-day appointments achieve a 95% attendance rate, but when patients wait over 30 days, we lose 35% of them.Young adults and specific neighborhoods are the most at risk. By reducing wait times and targeting these groups, attendance can improve dramatically.”*
 > 
