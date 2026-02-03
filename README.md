@@ -11,8 +11,11 @@ Project 1. **Hospital Readmission Analysis**
 
 Hospital readmissions within 30 days are a key quality metric, reflecting patient outcomes, care coordination, and chronic disease management. Diabetes patients are particularly at risk due to complex treatment regimens and comorbidities.
 
-Project 2. **Risk Stratification for Patients with Chronic Diseases**
+Project 2. **Risk Stratification for Patients with Chronic Diseases** 
 This project aims to identify patients at low, medium, or high risk of developing health complications based on demographics, lifestyle factors, and clinical indicators. By stratifying risk, healthcare teams can prioritize interventions, prevent adverse outcomes, and optimize care resources, which is essential in a value-based care environment.
+
+**Part 2 of project 2 - Predictive Analysis**
+
 
 Project 3. **Hospital Appointment No-Show Analysis**
 This project analyzes a real-world hospital appointment dataset (110,514 records) to identify the **primary drivers of no-show behavior** and translate those insights into **actionable operational strategies**.
@@ -348,6 +351,103 @@ This project demonstrates expertise in:
 - **Data Validation & Aggregation** (SQL queries, views)
 - **Visualization & Storytelling** (Power BI)
 - **Analytical Thinking & Interpretation** (risk analysis, trends, correlations)
+
+# Part 2 /Project 2 Predictive analysis - Predicting High-Risk Patients
+
+**Predicting High-Risk Patients Using Machine Learning**
+**Business Problem / Objective**
+
+Healthcare providers need to proactively identify patients at high risk of adverse outcomes based on demographics, lifestyle, and health factors. Early identification allows for targeted interventions, better resource allocation, and improved patient outcomes.
+
+Goal: Build a predictive model to classify patients as high-risk or not, and understand the key factors contributing to high risk.
+
+**Data Overview**
+
+Dataset: master_table (~12k patients)
+
+Features: Age, gender, race/ethnicity, income ratio, obesity, hypertension, smoking status, physical inactivity
+
+Target: high_risk (1 = high risk, 0 = low/medium risk)
+
+Challenge: Severe class imbalance (~2% high-risk patients)
+
+Observation: Most patients are low or medium risk; high-risk patients are rare but critical to identify.
+
+**Approach / Methodology**
+
+Step 1: Data Exploration (EDA)
+
+Examined distributions of age, lifestyle factors, and health indicators.
+
+Visualized relationships between features and risk categories.
+
+Step 2: Data Preparation
+
+Created a binary target variable (high_risk).
+
+Selected relevant features and removed any target-leakage columns (e.g., risk_score).
+
+Split data into train/test sets, ensuring stratification to maintain class proportions.
+
+Step 3: Address Class Imbalance
+
+Applied SMOTE oversampling to generate synthetic high-risk cases.
+
+Alternatively, experimented with class_weight='balanced' for models.
+
+Step 4: Model Building
+
+Logistic Regression: Interpretable, focused on catching all high-risk patients.
+
+Random Forest: Flexible, captured non-linear relationships, prioritized precision.
+
+Step 5: Model Evaluation
+
+Metrics used: Recall, Precision, F1-score, ROC-AUC
+
+Focused on recall for high-risk patients as clinically most important.
+
+**Key Findings**
+
+Logistic Regression:
+
+Recall = 1.0 for high-risk patients → no high-risk patients missed
+
+Precision = 0.15 → many false positives
+
+Highly interpretable; good for prioritizing safety.
+
+Random Forest:
+
+Precision = 1.0 for high-risk → predictions are highly reliable
+
+Recall = 0.81 → some high-risk patients missed
+
+Provided feature importance, highlighting key drivers of risk.
+
+Top Predictive Features: Age, hypertension, obesity, smoking status, physical inactivity
+
+Interpretation:
+
+Logistic Regression is suitable when avoiding missed high-risk cases is critical.
+
+Random Forest is suitable when high-confidence predictions are needed with fewer false positives.
+
+**Recommendations / Impact**
+
+Implement early-warning systems using predictive models to identify high-risk patients.
+
+Use Logistic Regression for broad screening (catch everyone at risk).
+
+Use Random Forest for targeted interventions where resources are limited.
+
+Focus interventions on modifiable risk factors (obesity, hypertension, smoking, inactivity).
+
+Next Steps:
+
+Incorporate additional features (lab results, medication history) to improve accuracy.
+
+Evaluate models in real clinical settings and monitor outcomes.
 
 # **Project 3. Hospital Appointment No-Show Analysis**
 
