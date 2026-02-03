@@ -1,11 +1,11 @@
 # Clinical_Data_Analysis.md
 
-Hello there, I am  Dr Sakina
-I am a curious, innovative healthcare data analyst. I strive to set new standards and drive innovation in healthcare data analytics. This portfolio is the beginning of my journey to show who I am and to demonstrate my potential in reaching my goals. 
+## Hello there, I am  Dr Sakina
+### I am a curious, innovative healthcare data analyst. I strive to set new standards and drive innovation in healthcare data analytics. This portfolio is the beginning of my journey to show who I am and to demonstrate my potential in reaching my goals. 
 
-This folder contains projects that analyze various clinical data.
-Every folder in this repository contains all relevant files, including code, pictures, and a raw dashboard link to Power BI.
-The projects are explained in detail below, after this brief introduction.
+##### This folder contains projects that analyze various clinical data.
+##### Every folder in this repository contains all relevant files, including code, pictures, and a raw dashboard link to Power BI.
+##### The projects are explained in detail below, after this brief introduction.
 
 Project 1. **Hospital Readmission Analysis**
 
