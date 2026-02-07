@@ -7,20 +7,23 @@
 ##### Every folder in this repository contains all relevant files, including code, pictures, and a raw dashboard link to Power BI.
 ##### The projects are explained in detail below, after this brief introduction.
 
-Project 1. **Hospital Readmission Analysis**
+**Project 1.** **Hospital Readmission Analysis**
 
 Hospital readmissions within 30 days are a key quality metric, reflecting patient outcomes, care coordination, and chronic disease management. Diabetes patients are particularly at risk due to complex treatment regimens and comorbidities.
 
-Project 2. **Risk Stratification for Patients with Chronic Diseases** 
+**Project 2.** **Risk Stratification for Patients with Chronic Diseases** 
 This project aims to identify patients at low, medium, or high risk of developing health complications based on demographics, lifestyle factors, and clinical indicators. By stratifying risk, healthcare teams can prioritize interventions, prevent adverse outcomes, and optimize care resources, which is essential in a value-based care environment.
 
 **Part 2 of project 2 - Predictive Analysis**
 
 
-Project 3. **Hospital Appointment No-Show Analysis**
+**Project 3.** **Hospital Appointment No-Show Analysis**
 This project analyzes a real-world hospital appointment dataset (110,514 records) to identify the **primary drivers of no-show behavior** and translate those insights into **actionable operational strategies**.
 
 The goal is not only to understand *who* misses appointments, but *why* — and more importantly, **what the hospital can do about it**.
+
+# NLP Project - Biomedical AI Sentiment Analysis
+This project focuses on building a sentiment analysis pipeline for biomedical and healthcare-related AI text. The goal is to automatically classify sentences into positive, neutral, or negative sentiments.
 
 More Projects to come.... 
 
@@ -679,4 +682,185 @@ The analysis shows that:
 
 By aligning scheduling strategy with patient behavior, healthcare providers can improve attendance, reduce wasted capacity, and deliver better care.
 
+# NLP 
+## Biomedical AI Sentiment Analysis
+#### Project Overview
+
+This project focuses on building a sentiment analysis pipeline for biomedical and healthcare-related AI text. The goal is to automatically classify sentences into positive, neutral, or negative sentiments.
+
+With the growing use of AI in healthcare, understanding the sentiment in research and discussions helps identify optimism, concerns, or neutral findings in biomedical literature. This project demonstrates an end-to-end NLP workflow, from data exploration and preprocessing to model training, evaluation, and deployment.
+
+**Dataset**
+
+Source: HuggingFace – Shekswess/ai-healthcare-biomedical-sentiment
+
+Content: 100 short biomedical AI-related text prompts
+
+Columns: keyword, topic, language, prompt, label
+
+Sentiment Classes: positive, neutral, negative
+
+**Observations:**
+
+Dataset is small but balanced: 36 positive, 33 negative, 31 neutral
+
+Average text length ~25 words
+
+Well-suited for TF-IDF based traditional ML models
+
+Workflow & Decision-Making
+**1. Data Exploration**
+
+Inspected columns and sample text
+
+Checked label distribution to ensure balance
+
+Analyzed text length to decide on preprocessing and max sequence considerations
+
+Decision Reasoning:
+Balanced datasets reduce bias; understanding text length informs preprocessing choices for feature extraction.
+
+**2. Data Cleaning**
+
+Converted text to lowercase
+
+Removed punctuation and extra spaces
+
+Created a clean_prompt column
+
+Decision Reasoning:
+
+Cleaning ensures consistent tokens for TF-IDF vectorization
+
+Minimizes noise and improves model performance
+
+**3. Feature Engineering**
+
+Used TF-IDF vectorization:
+
+max_features=2000 (top words/bigrams)
+
+ngram_range=(1,2) (unigrams + bigrams)
+
+stop_words="english"
+
+Decision Reasoning:
+
+Captures meaningful words and phrases
+
+Reduces influence of common stopwords
+
+Balances model complexity with performance
+
+**4. Label Encoding**
+
+Converted sentiment labels into numeric values:
+
+negative → 0
+
+neutral → 1
+
+positive → 2
+
+Decision Reasoning:
+
+Required for ML models which only understand numbers
+
+**5. Train/Test Split**
+
+Split 80/20 with stratification
+
+Maintained balanced distribution in both sets
+
+Decision Reasoning:
+
+Ensures fair evaluation on unseen data
+
+Prevents test set from being biased
+
+**6. Model Training**
+
+Baseline Model: Logistic Regression
+
+Alternative Model: Linear SVM (LinearSVC)
+
+Decision Reasoning:
+
+Logistic Regression: interpretable, fast, strong baseline
+
+SVM: robust in high-dimensional text space (TF-IDF features)
+
+Comparing models ensures optimal performance and justifies model choice
+
+**7. Evaluation**
+
+Metrics used:
+
+Accuracy: overall correctness (good due to balanced dataset)
+
+Precision / Recall / F1-Score: class-wise performance
+
+Confusion Matrix: visualizes errors per class
+
+**Decision Reasoning:**
+
+Accuracy alone can be misleading; F1-score balances precision and recall
+
+Class-level analysis identifies strengths and weaknesses (e.g., neutral class recall lower than others)
+
+**8. Model Saving & Deployment**
+
+Saved Logistic Regression model and TF-IDF vectorizer with joblib
+
+Created a reusable prediction function
+
+**Decision Reasoning:**
+
+Demonstrates real-world deployment readiness
+
+Makes workflow reproducible without retraining
+
+**Results**
+
+Both Logistic Regression and SVM achieved 90% accuracy
+
+Positive and negative sentiments were predicted almost perfectly
+
+Neutral sentiment had a slightly lower recall (0.67), highlighting challenges in ambiguous or mixed sentiment text
+
+**Insight:**
+
+The models perform well on small, clean datasets. Highlighting neutral misclassification shows critical thinking about real-world model limitations.
+
+Sample Predictions
+Text	Predicted Sentiment
+AI is improving patient outcomes in hospitals.	positive
+The use of AI raises serious ethical concerns about privacy.	negative
+AI is being explored in healthcare but results are still unclear.	negative
+
+### Future Improvements
+
+Increase dataset size to improve model generalization
+
+Try deep learning approaches (e.g., BERT) for improved contextual understanding
+
+Hyperparameter tuning to optimize model performance
+
+Better neutral detection using data augmentation or class weighting
+
+Deployment: integrate with web app (Flask/Streamlit) for live demo
+
+
+**Key Takeaways**
+
+An end-to-end NLP project can be done even with small datasets
+
+Proper EDA, preprocessing, and evaluation are critical for robust models
+
+Comparing multiple models justifies decisions and strengthens portfolio credibility
+
+Saving models and creating prediction functions demonstrates deployment readiness
+
+**Highlight:**
+This project not only demonstrates technical skills (Python, NLP, ML) but also decision-making reasoning, showing why each step was taken, and how to evaluate and improve models responsibly.
 
