@@ -708,7 +708,25 @@ Average text length ~25 words
 
 Well-suited for TF-IDF based traditional ML models
 
-Workflow & Decision-Making
+###### Workflow & Decision-Making
+
+✅ Dataset loaded + explored
+
+✅ Cleaned text pipeline
+
+✅ TF-IDF feature engineering
+
+✅ Two trained models (LogReg + SVM)
+
+✅ Evaluation with classification report + confusion matrix
+
+✅ Model comparison table
+
+✅ Saved + loaded model (deployment-ready)
+
+✅ Custom prediction function
+
+
 **1. Data Exploration**
 
 Inspected columns and sample text
