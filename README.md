@@ -7,7 +7,7 @@
 **Every folder in this repository contains all relevant files, including code, pictures, and a raw dashboard link to Power BI.**
 **The projects are explained in detail below, after this brief introduction.**
 
-# Case Studies - Non Clinical
+# Case Studies - Non Clinical 
 # Audit Monitoring & Analytics Dashboard (Power BI Case Study)
 
 ## Skills & Tools Used
