@@ -7,7 +7,7 @@
 **Every folder in this repository contains all relevant files, including code, pictures, and a raw dashboard link to Power BI.**
 **The projects are explained in detail below, after this brief introduction.**
 
-
+# Case Studies - Non Clinical
 # Audit Monitoring & Analytics Dashboard (Power BI Case Study)
 
 ## Skills & Tools Used
@@ -91,6 +91,8 @@ These outputs highlighted major risk concentrations in findings and revealed a s
 Conclusion
 
 This project delivered a complete audit analytics solution that supports audit leadership in monitoring audit delivery performance, identifying high-risk and high-severity findings, understanding root cause trends, and tracking auditor training progress. The dashboard enables stakeholders to prioritize remediation efforts, strengthen governance reporting, and improve audit effectiveness. Future enhancements could include management action closure tracking, time-based trend analysis, and automated risk scoring to further strengthen audit decision support.
+
+# Case Studies Clinical 
 
 **Project 1.** **Hospital Readmission Analysis**
 
