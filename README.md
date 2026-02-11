@@ -3,12 +3,94 @@
 ## Hello there, I am  Dr Sakina
 ### I am a curious, innovative data analyst. I strive to set new standards and drive innovation in healthcare data analytics. This portfolio is the beginning of my journey to show who I am and to demonstrate my potential in reaching my goals. I am passionate about how data can help decision-making in every field. I have showcased projects that demonstrate my potential to analyse **outside the scope of medicine**. 
 
-##### This folder contains projects that analyze various clinical data.
-##### Every folder in this repository contains all relevant files, including code, pictures, and a raw dashboard link to Power BI.
-##### The projects are explained in detail below, after this brief introduction.
+**This folder contains projects that analyze various clinical data.**
+**Every folder in this repository contains all relevant files, including code, pictures, and a raw dashboard link to Power BI.**
+**The projects are explained in detail below, after this brief introduction.**
 
-# Audit Monitoring Analysis Dashboard 
 
+# Audit Monitoring & Analytics Dashboard (Power BI Case Study)
+
+## Skills & Tools Used
+
+- **Microsoft Excel** (data cleaning, formatting, validation, standardization)
+- **Power BI Desktop** (dashboard development, interactive reporting)
+- **Power Query Editor** (data transformation, cleaning, modeling preparation)
+- **DAX (Data Analysis Expressions)** (measures, KPI calculations, performance metrics)
+- **Data Modeling (Star Schema Design)** (relationships, filtering logic, dimensional modeling)
+- **Data Visualization & Storytelling** (KPI design, drill-down reporting, executive layout)
+
+---
+
+## Project Introduction
+
+This project focuses on building an **Audit Monitoring & Analytics Dashboard** using Power BI to support audit teams and management in tracking audit performance, findings, root causes, and training progress.
+
+The purpose of this dashboard is to turn raw audit operational data into a structured reporting system that enables leadership to quickly answer critical questions such as:
+
+- Are audits being delivered on time?
+- Where are the biggest delays occurring?
+- What are the most common audit root causes?
+- Which business units generate the highest number of findings?
+- Are auditors meeting training expectations and completion targets?
+
+This project was designed as a portfolio-quality solution to demonstrate the ability to deliver an end-to-end reporting system that supports audit monitoring, governance, and performance oversight.
+
+---
+
+## Project Goal / Final Outcome
+
+The outcome targeted was a **4-page interactive Power BI dashboard** that provides:
+
+1. **Audit delivery performance tracking**
+2. **Delay monitoring and top delayed audits**
+3. **Audit findings analysis and root cause insights**
+4. **Auditor training and compliance tracking**
+
+The dashboard is designed to be used as a recurring monthly/quarterly monitoring tool to support audit planning, audit committee reporting, and continuous improvement initiatives.
+
+---
+
+## Dataset Selection & Why It Was Used
+
+The dataset selected for this project contained multiple audit-related files, including:
+
+- **Audit Engagements** (planned vs actual dates, status, business unit, risk rating)
+- **Audit Findings** (finding IDs, severity, root cause classifications)
+- **Training Records** (auditor assigned, training hours, completion status)
+- **Auditor dimension / stakeholder tables** (supporting information)
+
+This dataset was chosen because it provided both:
+
+- **operational audit performance data** (timelines, delays, audit status)
+- **quality and improvement data** (findings, root causes, severity)
+- **human capital development data** (training hours, completion rates)
+
+This combination made it ideal for building a realistic audit monitoring dashboard aligned with real-world audit reporting needs.
+Introduction
+
+This project involved building a 4-page Audit Monitoring & Analytics Dashboard in Power BI to support audit performance tracking, findings analysis, and training compliance monitoring. Using Excel, Power Query Editor, and DAX, raw audit datasets were cleaned, standardized, and modeled using a structured star schema to ensure accurate relationships and reliable KPI reporting. The goal was to transform unstructured audit data into an interactive dashboard that enables faster audit oversight, better decision-making, and clear executive-level reporting.
+
+**Key Results (Dashboard Outputs)**
+
+The final dashboard successfully generated measurable audit insights, including:
+
+Total Findings: 290,465
+
+High Risk Findings: ~26,000
+
+High Severity Findings: 9,110
+
+Total Training Hours: 1,479,752 (1.48M)
+
+Average Training Hours per Auditor: 369,938 (369.94K)
+
+Training Completion Rate: 50%
+
+These outputs highlighted major risk concentrations in findings and revealed a significant gap in training completion despite high recorded training hours.
+
+Conclusion
+
+This project delivered a complete audit analytics solution that supports audit leadership in monitoring audit delivery performance, identifying high-risk and high-severity findings, understanding root cause trends, and tracking auditor training progress. The dashboard enables stakeholders to prioritize remediation efforts, strengthen governance reporting, and improve audit effectiveness. Future enhancements could include management action closure tracking, time-based trend analysis, and automated risk scoring to further strengthen audit decision support.
 
 **Project 1.** **Hospital Readmission Analysis**
 
