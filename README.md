@@ -1,4 +1,4 @@
-# Data_Analysis.md
+# Data_Analysis
 
 ## Hello there, I am  Dr. Sakina
 ### I am a curious, innovative data analyst. I strive to set new standards and drive innovation in healthcare data analytics. This portfolio is the beginning of my journey to show who I am and to demonstrate my potential in reaching my goals. I am passionate about how data can help decision-making in every field. I have showcased projects that demonstrate my potential to analyse **outside the scope of medicine**. 
